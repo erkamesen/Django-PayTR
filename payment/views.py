@@ -57,7 +57,7 @@ def create_payment(request):
     item_response = [[item.product.name, item.product.price, 1]
                      for item in items]
     user_basket = base64.b64encode(json.dumps(item_response).encode())
-    user_ip = "149.86.143.220"
+    user_ip = "<your_ip>"
 
     timeout_limit = 30
     debug_on = 1
