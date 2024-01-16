@@ -1,0 +1,26 @@
+{% extends "../base.html" %}
+{% load static %}
+
+
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card">
+        </div>
+        <div class="col-md-6">
+            <h1>{{ product.name }}</h1>
+            <h2>Price: {{ product.price }} </h2>
+            <h3>{{ product.description }}</h3>
+            {% if request.user.username == "admin" %}
+            <a href="{% url 'food:delete-product' id=product.id %}">Delete</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

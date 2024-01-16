@@ -1,0 +1,37 @@
+{% extends "../base.html" %}
+{% load static %}
+
+
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <h2 class="text-center">My Cart</h2>
+{% for item in items %}
+
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top img-responsive" src="{{ item.product.image.url }}" alt="{{ item.product.name }} Photo">
+    <div class="card-body">
+      <h5 class="card-title">{{ item.product.name }}</h5>
+      <p class="card-text">{{ item.product.description }}</p>
+      <p class="card-text text-secondary">${{ item.product.price }}</p>
+   
+    </div>
+</div>
+{% empty %}
+<h3 class="text-center">Cart is empty</h3>
+{% endfor %}
+</div>
+</div>
+{% if items %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+                <h2>Total Price: {{ total_price }}</h2>
+                <a href="{% url 'payment:create-payment' %}" class="btn btn-success">Pay Now!</a>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock content %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+    {% block content %}
+    <div class="container">
+        
+        <div class="row mt-5">
+            <h1 class="text-center">Foods</h1>
+            <div class="col-lg-12">
+                <div class="row">
+                {% for product in  products %}
+                
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top img-responsive" src="{{ product.image.url }}" alt="{{ product.name }} Photo">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ product.name }}</h5>
+                      <p class="card-text">{{ product.description }}</p>
+                      <p class="card-text text-secondary">${{ product.price }}</p>
+                      <div class="card-footer"> 
+                        <h4>By {{product.owner }}</h4>
+                        <img src="{{ product.owner.profile.image.url }}" style="max-width:3rem;border-radius" class="rounded-circle">
+                      </div>
+                      <a href="{% url 'food:product' pk=product.pk %}" class="btn btn-success">Details</a>
+                      <a href="{% url 'food:add-to-cart' id=product.id %}" class="btn btn-success">Add To Cart</a>
+                   
+                </div>
+            </div>
+                {% empty %}
+                <p>There is nothing left..</p>
+                {% endfor %}
+            </div>
+            </div>
+        </div>
+    </div>
+    {% endblock content %}

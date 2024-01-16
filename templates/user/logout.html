@@ -1,0 +1,11 @@
+{% extends "../base.html" %}
+{% load static %}
+
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_div }}
+    <button type="submit">Logout</button>
+</form>
+
+{% endblock content %}

@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Menu</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a href="{% url 'food:main' %}" class="navbar-brand px-4">Food App</a>
+
+        <div class="navbar px-4">
+            <a href="{% url 'food:create-product' %}" class="nav-item  nav-link px-2 text-primary">Add Item</a>
+            <a href="{% url 'food:cart' %}" class="nav-item  nav-link px-2 text-primary">Cart</a>
+            {% if not user.is_authenticated %}
+            <a href="{% url 'login' %}" class="nav-item  nav-link px-2 text-primary">Login</a>
+            <a href="{% url 'register' %}" class="nav-item  nav-link px-2 text-primary">Register</a>
+            {% else %}
+            <a href="{% url 'logout' %}" class="nav-item  nav-link px-2 text-primary">Logout</a>
+            <a href="{% url 'profile' %}" class="nav-item  nav-link px-2 text-primary">Profile</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.level_tag }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
+    
+    {% block content %}
+    
+    {% endblock content %}
+
+</body>
+</html>
